@@ -82,7 +82,7 @@ return <div>
                {prods.map((item,index)=>{
                 return <div class="col-12 col-md-6 col-lg-4">
                     <div class="card">
-                        <img class="card-img-top" src={item.imgSrc} alt="Card image cap" />
+                        <img class="card-img-top" src={item.imageSrc} alt="Card image cap" />
                         <div class="card-body">
                             <h4 class="card-title"><a href="product.html" title="View Product">{item.title}</a></h4>
                                 <p class="card-text">{item.content}</p>
