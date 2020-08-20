@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
     Catalog.find({})
-        .limit(3)
+        .limit(4)
         .then((data) => res.send(data))
         .catch((err) => res.status(400).json("Error: " + err));
 

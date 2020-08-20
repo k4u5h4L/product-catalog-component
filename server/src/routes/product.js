@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
     Product.find({})
-        .limit(8)
+        .limit(Math.floor(Math.random()*(6-1)+1))
         .then((data) => res.send(data))
         .catch((err) => res.status(400).json("Error: " + err));
 

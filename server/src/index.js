@@ -1,7 +1,7 @@
 // main server file
 
 require("dotenv").config();
-
+var fs= require('fs');
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -13,9 +13,10 @@ const catalog = require("./routes/catalog");
 const product = require("./routes/product");
 const search = require("./routes/search");
 const notFound = require("./routes/notFound");
-
+const Category = require('./models/categories.model')
+const Product = require('./models/product.model')
 const app = express();
-const PORT = 8000;
+const PORT = 4000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
