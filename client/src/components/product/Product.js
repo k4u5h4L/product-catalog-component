@@ -13,9 +13,7 @@ const Product = (props) => {
                 />
                 <div className="card-body">
                     <h4 className="card-title">
-                        <a href="product.html" title="View Product">
-                            {props.productTitle}
-                        </a>
+                        <a title="View Product">{props.productTitle}</a>
                     </h4>
                     <p className="card-text">{props.description}</p>
                     <div className="row">
@@ -23,9 +21,7 @@ const Product = (props) => {
                             <p className="btn btn-danger btn-block"> {props.pricingText} </p>
                         </div>
                         <div className="col">
-                            <a href="#" className="btn btn-success btn-block">
-                                Add to cart
-                            </a>
+                            <a className="btn btn-success btn-block">Add to cart</a>
                         </div>
                     </div>
                 </div>

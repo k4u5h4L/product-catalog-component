@@ -4,16 +4,17 @@ import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import Navbar from "./navbar/Navbar";
+import Cart from "./cart/Cart";
 import Greeting from "./greeting/Greeting";
 import Location from "./location/Location";
 // import Category from "./category/Category"; // copied it to App.js for better state management
 import Product from "./product/Product";
-import Footer from "./footer/Footer";
 
 const App = () => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [currCate, setCurrCate] = useState("Wyatt Residency");
+    // const [cartNo, setCartNo] = useState(0);
 
     useEffect(() => {
         const getProduct = async () => {
@@ -22,7 +23,7 @@ const App = () => {
 
             console.log(data);
             setProducts(data.sort(() => Math.random() - 0.5));
-            console.log(`currCate: ${currCate}`);
+            // console.log(`currCate: ${currCate}`);
         };
 
         getProduct();
@@ -86,7 +87,6 @@ const App = () => {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 };
