@@ -6,9 +6,11 @@ const productSchema = new Schema({
     imageSrc: String,
     title: String,
     content: String,
-    price: String,
-    rating: String,
+    price: Number,
+    rating: Number,
+    reviews: Number,
     url: String,
+    hotel: String,
 });
 
 const Product = mongoose.model("Product", productSchema);

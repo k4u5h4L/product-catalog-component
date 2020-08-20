@@ -1,6 +1,6 @@
 // main App.js file
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, forceUpdate } from "react";
 import "./App.css";
 
 import Navbar from "./navbar/Navbar";
@@ -14,6 +14,7 @@ const App = () => {
     const [products, setProducts] = useState([]);
     const [categories, setCategories] = useState([]);
     const [currCate, setCurrCate] = useState("Wyatt Residency");
+    const [sortNo, setSortNo] = useState("random");
     // const [cartNo, setCartNo] = useState(0);
 
     useEffect(() => {
@@ -40,6 +41,40 @@ const App = () => {
 
         getCategory();
     }, []);
+
+    const sortAscending = () => {
+        if (sortNo == "ascending") {
+            console.log(`Already sorted ascending.`);
+            return;
+        }
+
+        setProducts(products.sort((a, b) => a.price - b.price));
+        // to sort the array of objects w.r.t. the price attribute
+
+        console.log(products);
+    };
+
+    const sortDescending = () => {
+        if (sortNo == "descending") {
+            console.log(`Already sorted descending.`);
+            return;
+        }
+
+        setProducts(products.sort((a, b) => b.price - a.price));
+        // to sort the array of objects w.r.t. the price attribute
+
+        console.log(products);
+    };
+
+    const sortRandom = () => {
+        if (sortNo == "random") {
+            console.log(`Already randomized.`);
+            return;
+        }
+        setProducts(products.sort(() => Math.random() - 0.5));
+
+        console.log(products);
+    };
 
     return (
         <div>
@@ -70,6 +105,46 @@ const App = () => {
                                 ))}
                             </ul>
                         </div>
+                        <div className="card bg-light mb-3">
+                            <div className="card-header bg-success text-white text-uppercase">Sort by</div>
+                            <div className="card-body">
+                                <ul className="list-group category_block">
+                                    <li
+                                        className="list-group-item"
+                                        onClick={() => {
+                                            console.log(`Sort clicked ascending`);
+                                            sortAscending();
+                                            setSortNo("ascending");
+                                            // console.log(sortNo);
+                                        }}
+                                    >
+                                        <a>Price (ascending)</a>
+                                    </li>
+                                    <li
+                                        className="list-group-item"
+                                        onClick={() => {
+                                            console.log(`Sort clicked descending`);
+                                            sortDescending();
+                                            setSortNo("descending");
+                                            // console.log(sortNo);
+                                        }}
+                                    >
+                                        <a>Price (descending)</a>
+                                    </li>
+                                    <li
+                                        className="list-group-item"
+                                        onClick={() => {
+                                            console.log(`Sort clicked descending`);
+                                            sortRandom();
+                                            setSortNo("random");
+                                            // console.log(sortNo);
+                                        }}
+                                    >
+                                        <a>Relevance</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="col">
@@ -87,6 +162,8 @@ const App = () => {
                     </div>
                 </div>
             </div>
+            <br />
+            <br />
         </div>
     );
 };
