@@ -21,7 +21,9 @@ const Product = (props) => {
                             <p className="btn btn-danger btn-block"> $ {props.pricingText} </p>
                         </div>
                         <div className="col">
-                            <a className="btn btn-success btn-block">Add to cart</a>
+                            <a onClick={() => props.onClickItem()} className="btn btn-success btn-block">
+                                Add to cart
+                            </a>
                         </div>
                     </div>
                 </div>

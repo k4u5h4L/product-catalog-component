@@ -1,10 +1,9 @@
 // main App.js file
 
-import React, { useState, useEffect, forceUpdate } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 
 import Navbar from "./navbar/Navbar";
-import Cart from "./cart/Cart";
 import Greeting from "./greeting/Greeting";
 import Location from "./location/Location";
 // import Category from "./category/Category"; // copied it to App.js for better state management
@@ -15,7 +14,9 @@ const App = () => {
     const [categories, setCategories] = useState([]);
     const [currCate, setCurrCate] = useState("Wyatt Residency");
     const [sortNo, setSortNo] = useState("random");
-    // const [cartNo, setCartNo] = useState(0);
+    const [cartNo, setCartNo] = useState(0);
+    const [activeCategory, setActiveCategory] = useState("Wyatt Residency");
+    const [activeFilter, setActiveFilter] = useState("random");
 
     useEffect(() => {
         const getProduct = async () => {
@@ -23,6 +24,7 @@ const App = () => {
             const data = await res.json();
 
             console.log(data);
+
             setProducts(data.sort(() => Math.random() - 0.5));
             // console.log(`currCate: ${currCate}`);
         };
@@ -43,7 +45,7 @@ const App = () => {
     }, []);
 
     const sortAscending = () => {
-        if (sortNo == "ascending") {
+        if (sortNo === "ascending") {
             console.log(`Already sorted ascending.`);
             return;
         }
@@ -55,7 +57,7 @@ const App = () => {
     };
 
     const sortDescending = () => {
-        if (sortNo == "descending") {
+        if (sortNo === "descending") {
             console.log(`Already sorted descending.`);
             return;
         }
@@ -67,7 +69,7 @@ const App = () => {
     };
 
     const sortRandom = () => {
-        if (sortNo == "random") {
+        if (sortNo === "random") {
             console.log(`Already randomized.`);
             return;
         }
@@ -76,9 +78,13 @@ const App = () => {
         console.log(products);
     };
 
+    const incrementCartNumber = () => {
+        setCartNo(cartNo + 1);
+    };
+
     return (
         <div>
-            <Navbar />
+            <Navbar cartNumber={cartNo} />
             <Greeting />
             <Location />
             <div className="container">
@@ -93,10 +99,13 @@ const App = () => {
                                 {categories.map((category, index) => (
                                     <div key={index}>
                                         <li
-                                            className="list-group-item"
+                                            className={`list-group-item ${
+                                                activeCategory === category.title ? "active" : null
+                                            }`}
                                             onClick={() => {
                                                 // console.log(`${category.title} CLICKED!`);
                                                 setCurrCate(category.title);
+                                                setActiveCategory(category.title);
                                             }}
                                         >
                                             <a>{category.title}</a>
@@ -110,37 +119,49 @@ const App = () => {
                             <div className="card-body">
                                 <ul className="list-group category_block">
                                     <li
-                                        className="list-group-item"
+                                        className={`list-group-item ${
+                                            activeFilter === "random" ? "active" : null
+                                        }`}
+                                        onClick={() => {
+                                            console.log(`Sort clicked relevance`);
+                                            sortRandom();
+                                            setSortNo("random");
+                                            setActiveFilter("random");
+                                            // console.log(`sortNo: ${sortNo}`);
+                                            // console.log(`activeFilter: ${activeFilter}`);
+                                        }}
+                                    >
+                                        <a>Relevance</a>
+                                    </li>
+                                    <li
+                                        className={`list-group-item ${
+                                            activeFilter === "ascending" ? "active" : null
+                                        }`}
                                         onClick={() => {
                                             console.log(`Sort clicked ascending`);
                                             sortAscending();
                                             setSortNo("ascending");
-                                            // console.log(sortNo);
+                                            setActiveFilter("ascending");
+                                            // console.log(`sortNo: ${sortNo}`);
+                                            // console.log(`activeFilter: ${activeFilter}`);
                                         }}
                                     >
                                         <a>Price (ascending)</a>
                                     </li>
                                     <li
-                                        className="list-group-item"
+                                        className={`list-group-item ${
+                                            activeFilter === "descending" ? "active" : null
+                                        }`}
                                         onClick={() => {
                                             console.log(`Sort clicked descending`);
                                             sortDescending();
                                             setSortNo("descending");
-                                            // console.log(sortNo);
+                                            setActiveFilter("descending");
+                                            // console.log(`sortNo: ${sortNo}`);
+                                            // console.log(`activeFilter: ${activeFilter}`);
                                         }}
                                     >
                                         <a>Price (descending)</a>
-                                    </li>
-                                    <li
-                                        className="list-group-item"
-                                        onClick={() => {
-                                            console.log(`Sort clicked descending`);
-                                            sortRandom();
-                                            setSortNo("random");
-                                            // console.log(sortNo);
-                                        }}
-                                    >
-                                        <a>Relevance</a>
                                     </li>
                                 </ul>
                             </div>
@@ -156,6 +177,7 @@ const App = () => {
                                     imageSrc={product.imageSrc}
                                     description={product.content}
                                     pricingText={product.price}
+                                    onClickItem={() => incrementCartNumber()}
                                 />
                             ))}
                         </div>

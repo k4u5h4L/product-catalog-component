@@ -1,7 +1,7 @@
 import React from "react";
 import Cart from "../cart/Cart";
 
-const Navbar = () => {
+const Navbar = (props) => {
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-dark">
             <div className="container">
@@ -41,7 +41,7 @@ const Navbar = () => {
                         </li>
                     </ul>
 
-                    <Cart />
+                    <Cart cartNumberTotal={props.cartNumber} />
                 </div>
             </div>
         </nav>
