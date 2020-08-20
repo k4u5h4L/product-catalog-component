@@ -5,8 +5,9 @@ const Catalog = require("../models/categories.model");
 const router = express.Router();
 
 router.get("/", (req, res) => {
+    // console.log(req.body);
     Catalog.find({})
-        .limit(3)
+        // .limit(3)
         .then((data) => res.send(data))
         .catch((err) => res.status(400).json("Error: " + err));
 

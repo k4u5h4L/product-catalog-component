@@ -4,8 +4,10 @@ const Product = require("../models/product.model");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
-    Product.find({})
+router.get("/:query", (req, res) => {
+    const searchQuery = req.params.query;
+    console.log(searchQuery);
+    Product.find({ hotel: searchQuery })
         .limit(8)
         .then((data) => res.send(data))
         .catch((err) => res.status(400).json("Error: " + err));
