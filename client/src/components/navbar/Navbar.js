@@ -1,10 +1,12 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Cart from "../cart/Cart";
 import $ from "jquery";
 
 import "./navbar.css";
 
 const Navbar = (props) => {
+  const [cartTotal, setCartTotal] = useState(0);
+
   console.log(props);
 
   useEffect(() => {
@@ -16,6 +18,20 @@ const Navbar = (props) => {
 
     hideCart();
   }, []);
+
+  useEffect(() => {
+    const updateTotal = () => {
+      let sum = 0;
+
+      for (let i = 0; i < props.cartItems.length; i++) {
+        sum += props.cartItems[i].price;
+      }
+
+      setCartTotal(sum);
+    };
+
+    updateTotal();
+  }, [props]);
 
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
@@ -79,14 +95,7 @@ const Navbar = (props) => {
             <span className="badge">{props.cartNumber}</span>
             <div className="shopping-cart-total">
               <span className="lighter-text">Total:</span>
-              <span className="main-color-text">
-                ${" "}
-                {props.cartItems.reduce((a, b) => {
-                  console.log(`a:`);
-                  console.log(a);
-                  return a.rating + b.rating;
-                }, 0)}
-              </span>
+              <span className="main-color-text">$ {cartTotal}</span>
             </div>
           </div>
 
