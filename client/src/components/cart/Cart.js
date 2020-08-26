@@ -1,10 +1,10 @@
 import React from "react";
 
 const Cart = (props) => {
-    return (
-        <div>
-            <form className="form-inline my-2 my-lg-0">
-                {/* <div className="input-group input-group-sm">
+  return (
+    <div>
+      <form className="form-inline my-2 my-lg-0">
+        {/* <div className="input-group input-group-sm">
                     <input
                         type="text"
                         className="form-control"
@@ -18,13 +18,13 @@ const Cart = (props) => {
                         </button>
                     </div>
                 </div> */}
-                <a className="btn btn-success btn-sm ml-3" href="cart.html">
-                    <i className="fa fa-shopping-cart"></i> Cart <span> </span>
-                    <span className="badge badge-light">{props.cartNumberTotal}</span>
-                </a>
-            </form>
-        </div>
-    );
+        <a className="btn btn-success btn-sm ml-3" href="#" id="cart">
+          <i className="fa fa-shopping-cart"></i> Cart <span> </span>
+          <span className="badge badge-light">{props.cartNumberTotal}</span>
+        </a>
+      </form>
+    </div>
+  );
 };
 
 export default Cart;
