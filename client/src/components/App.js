@@ -13,7 +13,7 @@ const App = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [currCate, setCurrCate] = useState("Wyatt Residency");
-  const [sortNo, setSortNo] = useState("random");
+  const [sortNo, setSortNo] = useState("relevance");
   const [cartNo, setCartNo] = useState(0);
   const [activeCategory, setActiveCategory] = useState("Wyatt Residency");
   const [activeFilter, setActiveFilter] = useState("random");
@@ -27,7 +27,7 @@ const App = () => {
 
       console.log(data);
 
-      setProducts(data.sort(() => Math.random() - 0.5));
+      setProducts(data.sort((a, b) => b.rating - a.rating));
       // console.log(`currCate: ${currCate}`);
     };
 
@@ -70,12 +70,12 @@ const App = () => {
     console.log(products);
   };
 
-  const sortRandom = () => {
-    if (sortNo === "random") {
-      console.log(`Already randomized.`);
+  const sortRelevance = () => {
+    if (sortNo === "relevance") {
+      console.log(`Already sorted by relevance.`);
       return;
     }
-    setProducts(products.sort(() => Math.random() - 0.5));
+    setProducts(products.sort((a, b) => b.rating - a.rating));
 
     console.log(products);
   };
@@ -132,7 +132,7 @@ const App = () => {
                     }`}
                     onClick={() => {
                       console.log(`Sort clicked relevance`);
-                      sortRandom();
+                      sortRelevance();
                       setSortNo("random");
                       setActiveFilter("random");
                       // console.log(`sortNo: ${sortNo}`);
