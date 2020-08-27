@@ -5,7 +5,7 @@
 }
 body {
   font: 14px/22px "Lato", Arial, sans-serif;
-  background: #6394f8;
+  background: #ffffff;
 }
 .lighter-text {
   color: #abb0be;
@@ -53,10 +53,13 @@ nav ul li a:hover {
 }
 .shopping-cart {
   margin: 20px 0;
+  right: inherit;
+  left: 62%;
   float: right;
   background: white;
   width: 320px;
-  position: relative;
+  position: absolute;
+  z-index: +1;
   border-radius: 3px;
   padding: 20px;
 }
@@ -126,4 +129,15 @@ nav ul li a:hover {
   content: "";
   display: table;
   clear: both;
+}
+
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
 }

@@ -185,6 +185,7 @@ const App = () => {
                   imageSrc={product.imageSrc}
                   description={product.content}
                   pricingText={product.price}
+                  rating={product.rating}
                   onClickItem={() => {
                     incrementCartNumber(product);
                   }}
